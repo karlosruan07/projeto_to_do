@@ -1,0 +1,59 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Listas
+{% endblock %}
+
+
+{% block content %}
+    <h1 id="listas">Esta é a página de listas </h1>
+
+    <div class="col-9 search-div">
+        <input class="form-control" type="text" id="search" name="search" placeholder="Digite para Pesquisar">
+        <i class="bi bi-search"></i>
+    </div>
+
+    <table class="centered striped">
+        <thead>
+          <tr>
+              <th>ID</th>
+              <th>Titulo</th>
+              <th>Descrição</th>
+              <th>Status</th>
+              <th>Data de Criação</th>
+              <th>Última atualização</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td>{{task.id}}</td>
+            <td><a href="/detalhe_tarefa/{{task.id}}/">{{task.title}}</a></td>
+            <td>{{task.description}}</td>
+            <td>{{task.status}}</td>
+            <td>{{task.created_at}}</td>
+            <td>{{task.updated_at}}</td>
+
+
+            <td> <a href="#">eger</a></td>
+            <td>
+                <a href="#">rgreger</a> 
+            
+
+            </td>
+          </tr>
+        {% endfor %}
+        
+        </tbody>
+        
+      </table>
+
+
+
+{% endblock %}
+
+{% block footer %}
+Esta é a página footer
+{% endblock %}

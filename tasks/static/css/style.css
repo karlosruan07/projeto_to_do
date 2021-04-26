@@ -1,3 +1,20 @@
-#text_nav{
-    color: slateblue;
+
+#img{
+    
+
+    width: 200px; /*500 px das laterias da pagina*/
+    margin: auto; /*Centraliza o conteudo*/
+    height: 200px;
 }
+
+/*Conteudo nav-bar*/
+
+#text_nav{
+    color: rgb(18, 231, 18);
+
+}
+
+.search-div{
+    
+}
+
