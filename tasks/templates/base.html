@@ -2,70 +2,79 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"><!--IMPORTANDO O BOOTSTRAP A PARTIR DE DA CDN-->
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>{% block title %}{% endblock %}</title>
-</head> 
+
+  <title>{% block title %}{% endblock %}</title>
+</head>
 <div id="img">
-    <img class="imagem" src="{% static 'img/django.png' %}" width="200" alt=""><br>
+  <img class="imagem" src="{% static 'img/django.png' %}" width="200" alt=""><br>
 </div>
-    <body>
 
-    <div class="container-fluid">
+<body>
 
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" id="text_nav" href="#">Home</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="text_nav" aria-current="page" href="#">To do</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link active" id="text_nav" aria-current="page" href="#">Tarefas</a>
-                  </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link active" id="text_nav" aria-current="page" href="#">Usuários</a>
-                  </li>
-                  
-                </ul>
-            
-              </div>
-            </div>
-          </nav>
+  <div class="container">
 
 
-        {% block content %}
-        {% endblock %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" id="text_nav" href="{% url 'lista_tarefas' %}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" id="text_nav" aria-current="page" href="#">To do</a>
+            </li>
 
-       
-<br>
-    <footer>
-        {% block footer %}
+            <li class="nav-item">
+              <a class="nav-link active" id="text_nav" aria-current="page" href="#">Tarefas</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" id="text_nav" aria-current="page" href="#">Usuários</a>
+            </li>
+
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <a href="{% url 'adicionar_tarefa' %}"><button class="btn btn-primary mt-2" id="buttom_add" type="button">Adicionar</button></a>
+
+    {% block content %}
     
-        {% endblock %}
+    {% endblock %}
+
+
+    <br>
+    <footer>
+      {% block footer %}
+
+      {% endblock %}
     </footer>
-    </div>
+  </div>
 
+  <!--IMPORTANDO O BOOTSTRAP A PARTIR DE DA CDN-->
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script> <!--IMPORTANDO O BOOTSTRAP A PARTIR DE DA CDN-->
-
-<script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.js.map' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js.map' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js.map' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js.map' %}"></script>
 
 </body>
 
