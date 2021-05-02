@@ -12,3 +12,12 @@
 #buttom_add{
     margin-left: auto;
 }
+
+.pag{
+    width: 200px; /*500 px das laterias da pagina*/
+    margin: auto; /*Centraliza o conteudo*/
+    height: 200px;
+}
+
+
+

@@ -1,14 +1,16 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.contrib import messages
+from django.core.paginator import Paginator
+
 
 #####  bibliotecas DO TASKS #####
 from .models import Task
 from .forms import Form_tarefa
 
+
 ###### VIEWs de estudo  ######
-
-
 def hello_word(request):
     return HttpResponse('<h1> Olá, Mundo ! </>')
 
@@ -28,7 +30,11 @@ def seunome(request, seunome):
 
 #####  FUNÇÕES DO TASKS #####
 def lista_tarefas(request):
-    tasks = Task.objects.all()
+    
+    tasks_list = Task.objects.all()
+    paginacao = Paginator(tasks_list, 3)    
+    page = request.GET.get('page')
+    tasks = paginacao.get_page(page)
     return render(request, 'arquivos_html/tasks/listas.html', {"tasks": tasks})
 
 
@@ -64,5 +70,20 @@ def editar_tarefa(request, id):
         else:
             return render(request, 'arquivos_html/tasks/editar_tarefa.html', {"form":form})
     return render(request, 'arquivos_html/tasks/editar_tarefa.html', {"form":form, "tarefa_obtida":tarefa_obtida})
+
+
+def confirmar_delete_tarefa(request, id):
+    id_tarefa = get_object_or_404(Task, pk=id)
+    return render(request, 'arquivos_html/tasks/confirmar_delete_tarefa.html', {"id":id_tarefa.id})
+
+
+def deletar_tarefa(request, id):
+    tarefa_obtida = get_object_or_404(Task, pk=id)
+    tarefa_obtida.delete()
+    messages.info(request, 'Tarefa apagada !')
+    return redirect('lista_tarefas')
+
+
+
 
 

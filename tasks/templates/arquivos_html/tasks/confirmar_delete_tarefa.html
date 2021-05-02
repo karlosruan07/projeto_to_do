@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <h2> O id da tarefa é {{id}}</h2>
+
+    <script>
+        if(confirm("Deseja apagar ?")){
+
+            alert('Apagado')
+            window.location = "{% url 'deletar_tarefa' id=id %}"
+        }
+        else{
+            alert('Cancelado com sucesso.')
+            window.location = "{% url 'lista_tarefas' %}"
+        }
+    </script>
+
+{% endblock %}

@@ -1,4 +1,7 @@
+
 {% extends 'base.html' %}
+
+{% load static %}
 
 {% block title %}
 Listas
@@ -12,6 +15,14 @@ Listas
   <input class="form-control" type="text" id="search" name="search" placeholder="Digite para Pesquisar">
   <i class="bi bi-search"></i>
 </div>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
 <table class="centered striped">
   <thead>
@@ -49,7 +60,7 @@ Listas
         </a>
       </td>
       <td>
-        <a href="#">
+        <a href="{% url 'confirmar_delete_tarefa' task.id %}">
           <button class="btn btn-primary" type="">
 
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
@@ -65,10 +76,28 @@ Listas
       </td>
     </tr>
     {% endfor %}
+        
 
   </tbody>
 
 </table>
+<br>
+<div class="pagination pag mt-2">
+  <span class="step-links">
+      {% if tasks.has_previous %}
+        <a href="?page={{ tasks.previous_page_number }}">Anterior</a>
+      {% endif %}
+
+      <span class="current">
+        Pagina {{tasks.number}} de {{ tasks.paginator.num_pages }}
+      </span>
+
+      {% if tasks.has_next %}
+        <a href="?page={{ tasks.next_page_number }}">Proxima</a>
+        
+        {% endif %}
+  </span>
+</div>
 
 {% endblock %}
 
