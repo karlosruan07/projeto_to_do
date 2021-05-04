@@ -19,5 +19,11 @@
     height: 200px;
 }
 
+.bi.bi-search{
+    position: absolute;
+    top: 12px;
+    right: 26px;
+}
+
 
 

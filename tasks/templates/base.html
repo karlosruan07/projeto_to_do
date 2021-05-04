@@ -10,7 +10,7 @@
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  
+
 
 
   <title>{% block title %}{% endblock %}</title>
@@ -20,18 +20,20 @@
 </div>
 
 <body>
-
+  {% block menu %}
   <div class="container">
 
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" id="text_nav" href="{% url 'lista_tarefas' %}">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          {% if request.user.is_authenticated %}
+          <a class="navbar-brand" id="text_nav" href="{% url 'lista_tarefas' %}">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" id="text_nav" aria-current="page" href="#">To do</a>
@@ -45,25 +47,42 @@
               <a class="nav-link active" id="text_nav" aria-current="page" href="#">Usuários</a>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link active" id="text_nav" aria-current="page" href="{% url 'logout' %}">Sair</a>
+            </li>
+            
+            {% else %}
+      
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" id="text_nav" aria-current="page" href="{% url 'login' %}">Entrar</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" id="text_nav" aria-current="page" href="#">Sobre</a>
+            </li>
           </ul>
+          
+          {% endif %}
 
         </div>
-      </div>
     </nav>
+  </div>
+  
+  {% endblock %}
+  <a href="{% url 'adicionar_tarefa' %}"><button class="btn btn-primary mt-2" id="buttom_add"
+    type="button">Adicionar</button></a>
+  {% block content %}
+  
+  {% endblock %}
 
-    <a href="{% url 'adicionar_tarefa' %}"><button class="btn btn-primary mt-2" id="buttom_add" type="button">Adicionar</button></a>
 
-    {% block content %}
-    
+  <br>
+  <footer>
+    {% block footer %}
+
     {% endblock %}
-
-
-    <br>
-    <footer>
-      {% block footer %}
-
-      {% endblock %}
-    </footer>
+  </footer>
   </div>
 
   <!--IMPORTANDO O BOOTSTRAP A PARTIR DE DA CDN-->

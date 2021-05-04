@@ -1,13 +1,11 @@
 
 from django.urls import path
 from . import views
-from .views import lista_tarefas, seunome, login, semantico, detalhe_tarefa, adicionar_tarefa
+from .views import lista_tarefas, seunome, detalhe_tarefa, adicionar_tarefa
 
 urlpatterns = [
     #####  URLs de estudos   ####
     path('hello_word', views.hello_word, name='hello_word'),
-    path('login/',views.login, name='login'),
-    path('semantico/', views.semantico, name='semantico'),
     path('seunome/<str:seunome>/',views.seunome, name='seunome'),#passando argumentos na url
 
     
@@ -19,4 +17,7 @@ urlpatterns = [
     path('confirmar_delete_tarefa/<int:id>/', views.confirmar_delete_tarefa, name='confirmar_delete_tarefa'),
     path('deletar_tarefa/<int:id>/', views.deletar_tarefa, name='deletar_tarefa'),
     
+    
+    #####  URLs de cadastro e login  #######
+    path('cadastrar/', views.Criar_usuario.as_view(), name='cadastrar'),
 ]

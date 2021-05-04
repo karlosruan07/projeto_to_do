@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% load static %}
@@ -9,22 +8,27 @@ Listas
 
 
 {% block content %}
-<h1 id="listas">Esta é a página de listas </h1>
 
-<div class="col-9 search-div">
-  <input class="form-control" type="text" id="search" name="search" placeholder="Digite para Pesquisar">
-  <i class="bi bi-search"></i>
-</div>
+<div class="col-9 search-div mt-4">
+  <form action="" method="GET" id="search-form">
+    <input class="form-control" type="text" id="search" name="search" placeholder="Digite para Pesquisar" value="{{ request.GET.search }}">
+    
+  <svg onclick='teste()' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" id='search-btn' viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+  </svg>
+  </form>
 
-{% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-  </ul>
+  {% if messages %}
+<ul class="messages mt-2">
+  {% for message in messages %}
+  <li {% if message.tags %}class="alert alert-{{message.tags}}" {% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
 {% endif %}
 
-<table class="centered striped">
+</div>
+
+<table class="centered striped mt-4">
   <thead>
     <tr>
       <th>ID</th>
@@ -76,7 +80,7 @@ Listas
       </td>
     </tr>
     {% endfor %}
-        
+
 
   </tbody>
 
@@ -84,18 +88,20 @@ Listas
 <br>
 <div class="pagination pag mt-2">
   <span class="step-links">
-      {% if tasks.has_previous %}
-        <a href="?page={{ tasks.previous_page_number }}">Anterior</a>
-      {% endif %}
+    {% if tasks.has_previous %}
+    <a href="?page={{ tasks.previous_page_number }}">Anterior</a>
+    {% endif %}
 
+    {% if tasks.paginator.num_pages %}
       <span class="current">
         Pagina {{tasks.number}} de {{ tasks.paginator.num_pages }}
       </span>
+    {% endif %}
 
-      {% if tasks.has_next %}
-        <a href="?page={{ tasks.next_page_number }}">Proxima</a>
-        
-        {% endif %}
+    {% if tasks.has_next %}
+    <a href="?page={{ tasks.next_page_number }}">Proxima</a>
+
+    {% endif %}
   </span>
 </div>
 
