@@ -1,12 +1,28 @@
 
+function done() {
+    window.location = "/filtro/done"
+}
 
-var search_btn = $('#search-btn')
-var search_form = $('#search-form')
+function doing() {
+    window.location = "/filtro/doing"
+}
 
-$(search_btn).on('click', function () {
-    search_form.submit()
-});
+/* {% extends 'base.html' %}
 
+{% load static %}
 
+{% block content %}
 
+    <script>
+        if(confirm("Deseja apagar ?")){
 
+            alert('Apagado')
+            window.location = "{% url 'deletar_tarefa' id=id %}"
+        }
+        else{
+            alert('Cancelado com sucesso.')
+            window.location = "{% url 'lista_tarefas' %}"
+        }
+    </script>
+
+{% endblock %} */

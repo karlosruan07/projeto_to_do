@@ -11,20 +11,36 @@ Listas
 
 <div class="col-9 search-div mt-4">
   <form action="" method="GET" id="search-form">
-    <input class="form-control" type="text" id="search" name="search" placeholder="Digite para Pesquisar" value="{{ request.GET.search }}">
-    
-  <svg onclick='teste()' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" id='search-btn' viewBox="0 0 16 16">
-    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-  </svg>
+    <input class="form-control" type="text" id="search" name="search" placeholder="Digite para Pesquisar"
+      value="{{ request.GET.search }}">
+    <svg onclick='teste()' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      class="bi bi-search" id='search-btn' viewBox="0 0 16 16">
+      <path
+        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+    </svg>
   </form>
 
+
+  <div class="col-15 filter-div">
+    <span>
+      Filtrar por:
+    </span>
+
+    
+      <select name="filtrar_tarefa" id="filtrar_tarefa" class="form-control">
+        <option onclick=done() name="filtrar_tarefa" value="done">Tarefas concluidas </option>
+        <option onclick=doing() name="filtrar_tarefa" value="doing">Tarefas pendentes</option>
+      </select>
+
+  </div>
+
   {% if messages %}
-<ul class="messages mt-2">
-  {% for message in messages %}
-  <li {% if message.tags %}class="alert alert-{{message.tags}}" {% endif %}>{{ message }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+  <ul class="messages mt-2">
+    {% for message in messages %}
+    <li {% if message.tags %}class="alert alert-{{message.tags}}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 
 </div>
 
@@ -63,6 +79,7 @@ Listas
           </button>
         </a>
       </td>
+
       <td>
         <a href="{% url 'confirmar_delete_tarefa' task.id %}">
           <button class="btn btn-primary" type="">
@@ -78,6 +95,39 @@ Listas
           </button>
         </a>
       </td>
+
+      {% if task.status == 'done' %}
+      <td>
+        <a href="{% url 'mudar_status' task.id %}">
+          <button id="botao_status_done" class="btn btn-primary">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2"
+              viewBox="0 0 16 16">
+              <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+            </svg>
+
+          </button>
+        </a>
+      </td>
+
+      {% else %}
+
+      <td>
+        <a href="{% url 'mudar_status' task.id %}">
+          <button class="btn btn-primary" id="botao_status_doing">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2"
+              viewBox="0 0 16 16">
+              <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+            </svg>
+
+          </button>
+        </a>
+      </td>
+
+      {% endif %}
     </tr>
     {% endfor %}
 
@@ -93,9 +143,9 @@ Listas
     {% endif %}
 
     {% if tasks.paginator.num_pages %}
-      <span class="current">
-        Pagina {{tasks.number}} de {{ tasks.paginator.num_pages }}
-      </span>
+    <span class="current">
+      Pagina {{tasks.number}} de {{ tasks.paginator.num_pages }}
+    </span>
     {% endif %}
 
     {% if tasks.has_next %}

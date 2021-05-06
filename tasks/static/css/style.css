@@ -25,5 +25,28 @@
     right: 26px;
 }
 
+#criar_conta{
+    width: 300px; /*500 px das laterias da pagina*/
+    margin: auto; /*Centraliza o conteudo*/
+    height: 300px;
+    text-align: center;
+}
 
+#botao_status_done{
+    background-color: green;
+}
 
+#botao_status_doing{
+    background-color: red;
+}
+
+.filter-div{
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+#filter{
+    display: inline block;
+    width: 200px;
+    margin-left: 10px;
+}

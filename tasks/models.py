@@ -1,5 +1,5 @@
 from django.db import models
-# Create your models here.
+from django.contrib.auth import get_user_model
 
 STATUS = (
     ('doing', 'Doing'),
@@ -13,7 +13,7 @@ class Task(models.Model):
         choices=STATUS,                    )
     created_at = models.DateTimeField(auto_now_add=True)#pega a data da criação automaticamente
     update_at = models.DateTimeField(auto_now=True)#Depois de ja ter ter a data de criação então ele só atualiza a data
-    
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     def __str__(self):
         return self.title
     

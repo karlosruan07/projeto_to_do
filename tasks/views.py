@@ -33,12 +33,14 @@ def lista_tarefas(request):
     if request.user.is_authenticated:
     
         search = request.GET.get('search')
+        
+                
         if search:
-            tasks = Task.objects.filter(title__icontains=search)#para buscar por outro atributo então é só mudar o title que está passado como parâmetro
+            tasks = Task.objects.filter(title__icontains=search, user=request.user)#para buscar por outro atributo então é só mudar o title que está passado como parâmetro
             
         else:
         
-            tasks_list = Task.objects.all()
+            tasks_list = Task.objects.filter(user=request.user)
             paginacao = Paginator(tasks_list, 3)    
             page = request.GET.get('page')
             tasks = paginacao.get_page(page)
@@ -48,7 +50,9 @@ def lista_tarefas(request):
 
 @login_required
 def detalhe_tarefa(request, pk):
-    tarefa = get_object_or_404(Task, id=pk)
+     
+    
+    tarefa = get_object_or_404(Task, id=pk, user=request.user)
     return render(request, 'arquivos_html/tasks/detalhe_tarefa.html', {"tarefa": tarefa})
 
 
@@ -59,6 +63,7 @@ def adicionar_tarefa(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.status = 'done'
+            post.user = request.user
             post.save()
             return redirect('lista_tarefas')
         
@@ -70,9 +75,10 @@ def adicionar_tarefa(request):
 
 @login_required
 def editar_tarefa(request, id):
-    tarefa_obtida = get_object_or_404(Task, pk=id)
-    form = Form_tarefa(instance=tarefa_obtida)
     
+    tarefa_obtida = get_object_or_404(Task, pk=id, user=request.user)#busca o id de uma task de user authenticado
+    
+    form = Form_tarefa(instance=tarefa_obtida)
     if (request.method == 'POST'):
         form = Form_tarefa(request.POST,instance=tarefa_obtida)
         if(form.is_valid()):
@@ -84,16 +90,32 @@ def editar_tarefa(request, id):
 
 @login_required
 def confirmar_delete_tarefa(request, id):
-    id_tarefa = get_object_or_404(Task, pk=id)
+    id_tarefa = get_object_or_404(Task, pk=id, user=request.user)
     return render(request, 'arquivos_html/tasks/confirmar_delete_tarefa.html', {"id":id_tarefa.id})
 
 
 @login_required
 def deletar_tarefa(request, id):
-    tarefa_obtida = get_object_or_404(Task, pk=id)
+    tarefa_obtida = get_object_or_404(Task, pk=id, user=request.user)
     tarefa_obtida.delete()
     messages.info(request, 'Item apagado com sucesso !')
     return redirect('lista_tarefas')
+
+
+def mudar_status(request, id):
+    tarefa_obtida = get_object_or_404(Task, pk=id, user=request.user)
+    
+    if tarefa_obtida.status == 'done':
+        tarefa_obtida.status = 'doing'
+    else:
+        tarefa_obtida.status = 'done'
+    tarefa_obtida.save()
+    return redirect('lista_tarefas')
+
+
+def filtro_status(request, status):
+    tasks = Task.objects.filter(status__icontains=status, user=request.user)    
+    return render(request, 'arquivos_html/tasks/listas.html', {"tasks": tasks})
 
 
 class Criar_usuario(CreateView):
