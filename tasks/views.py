@@ -10,6 +10,7 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .forms import Cadastrar_usuario
 
+import datetime
 
 #####  bibliotecas DO TASKS #####
 from .models import Task
@@ -34,6 +35,9 @@ def lista_tarefas(request):
     
         search = request.GET.get('search')
         
+        tarefas_concluidas_recente = tasks = Task.objects.filter(status='done', update_at__gt=datetime.datetime.now() - datetime.timedelta(days=30), user=request.user).count()
+        tarefas_concluidas = Task.objects.filter(status='done', user=request.user).count()
+        tarefas_incom = Task.objects.filter(status='doing', user=request.user).count()
                 
         if search:
             tasks = Task.objects.filter(title__icontains=search, user=request.user)#para buscar por outro atributo então é só mudar o title que está passado como parâmetro
@@ -44,7 +48,7 @@ def lista_tarefas(request):
             paginacao = Paginator(tasks_list, 3)    
             page = request.GET.get('page')
             tasks = paginacao.get_page(page)
-        return render(request, 'arquivos_html/tasks/listas.html', {"tasks": tasks})
+        return render(request, 'arquivos_html/tasks/listas.html', {"tasks": tasks, "tarefas_concluidas_recente":tarefas_concluidas_recente, "tarefas_concluidas":tarefas_concluidas, "tarefas_incom":tarefas_incom})
     else:
         return redirect('login')
 
