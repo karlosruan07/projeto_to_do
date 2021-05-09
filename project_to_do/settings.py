@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []#para permitir requisições de diversos host tem colocar "*" 
 # Application definition
 
 INSTALLED_APPS = [
+    
+    'jet.dashboard',
+    'jet',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     'tasks',
     'users',
     'crispy_forms',
+
 ]
 
 MIDDLEWARE = [

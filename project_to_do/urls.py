@@ -21,4 +21,7 @@ urlpatterns = [
     path('', include('tasks.urls')),
     path('accounts/', include('tasks.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    
+    path ('jet/',include('jet.urls','jet')),   # Django JET URLS 
+    path('jet/dashboard/',include('jet.dashboard.urls', 'jet-dashboard')),
 ]

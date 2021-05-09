@@ -9,10 +9,9 @@
 
 /*Conteudo nav-bar*/
 
-#buttom_add{
-    margin-left: auto;
+#botao_adicionar{
+    
 }
-
 .pag{
     width: 200px; /*500 px das laterias da pagina*/
     margin: auto; /*Centraliza o conteudo*/

@@ -9,10 +9,10 @@ Listas
 
 {% block content %}
 
-<a href="{% url 'adicionar_tarefa' %}"><button class="btn btn-primary mt-2" id="buttom_add"
+<a class="" href="{% url 'adicionar_tarefa' %}"><button class="btn btn-primary mt-2" id="botao_adicionar"
   type="button">Adicionar</button></a>
 
-<div class="col-9 search-div mt-4">
+<div class="container col-9 search-div mt-4">
   <div>
     <form action="" method="GET" id="search-form">
       <input class="form-control" type="text" id="search" name="search" placeholder="Digite para Pesquisar"
@@ -68,7 +68,7 @@ Listas
 
 
 
-<table class="centered striped mt-4">
+<table class="container striped mt-4">
   <thead>
     <tr>
       <th>ID</th>
