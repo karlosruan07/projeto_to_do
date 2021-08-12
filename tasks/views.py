@@ -40,7 +40,7 @@ def lista_tarefas(request):
         tarefas_incom = Task.objects.filter(status='doing', user=request.user).count()
                 
         if search:
-            tasks = Task.objects.filter(title__icontains=search, user=request.user)#para buscar por outro atributo então é só mudar o title que está passado como parâmetro
+            todas_tarefas = Task.objects.filter(title__icontains=search, user=request.user)#para buscar por outro atributo então é só mudar o title que está passado como parâmetro
             
         else:
         
@@ -48,7 +48,9 @@ def lista_tarefas(request):
             paginacao = Paginator(tasks_list, 3)    
             page = request.GET.get('page')
             tasks = paginacao.get_page(page)
-        return render(request, 'arquivos_html/tasks/listas.html', {"tasks": tasks, "tarefas_concluidas_recente":tarefas_concluidas_recente, "tarefas_concluidas":tarefas_concluidas, "tarefas_incom":tarefas_incom})
+            contexto = {"tasks_list": tasks_list, "tarefas_concluidas_recente":tarefas_concluidas_recente,
+            "tarefas_concluidas":tarefas_concluidas, "tarefas_incom":tarefas_incom}
+        return render(request, 'arquivos_html/tasks/lista_tarefas.html', contexto )
     else:
         return redirect('login')
 

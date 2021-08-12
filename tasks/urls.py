@@ -11,7 +11,7 @@ urlpatterns = [
     
     #####  URLs TASKS  #######
     path('', views.lista_tarefas, name='lista_tarefas'),
-    path('detalhe_tarefa/<int:pk>/', views.detalhe_tarefa, name='detalhe_tarefa'),
+    path('detalhe-tarefa/<int:pk>/', views.detalhe_tarefa, name='detalhe-tarefa'),
     path('adicionar_tarefa/', views.adicionar_tarefa, name='adicionar_tarefa'),
     path('editar_tarefa/<int:id>/', views.editar_tarefa, name='editar_tarefa'),
     path('confirmar_delete_tarefa/<int:id>/', views.confirmar_delete_tarefa, name='confirmar_delete_tarefa'),

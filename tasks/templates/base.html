@@ -1,97 +1,164 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-  
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+  <!-- Import do CSS (Materialize) -->
+
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <link rel="stylesheet" href=" {% static 'css/materialize.min.css' %} ">
+
+  <!-- IMPORT DO GOOGLE FONTS -->
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
-
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}To Do{% endblock %}</title>
 </head>
-<div id="img">
-  <img class="imagem " src="{% static 'img/django.png' %}" width="200" alt=""><br>
-</div>
 
 <body>
-  {% block menu %}
-  <div class="container">
+  <!-- INICIO DA NAVBAR -->
+  <section>
+    <header>
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+      {% block header %}
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">ENTRAR</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">SAIR</a></li>
+        <li class="divider"></li>
+      </ul>
 
-          {% if request.user.is_authenticated %}
-          <a class="navbar-brand" id="text_nav" href="{% url 'lista_tarefas' %}">Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!--MENU LATERAL MOBILE-->
+      <ul id="menu-mobile" class="sidenav">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="">
+            </div>
+            <a href="#user"><img class="circle" src="{% static 'img/avatar_femenino.png' %}"></a>
+            <a href="#name"><span class="white-text name">John Doe</span></a>
+            <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+          </div>
+        </li>
+        <li><a href="#"><i class="material-icons">description</i>Alterar
+            Dados</a></li>
+        <li><a href="#"><i class="material-icons">password</i>Alterar Senha</a></li>
+        <li><a href="#"><i class="material-icons">lock</i>Esqueci Minha Senha</a></li>
+        <li><a href="#"><i class="material-icons">login</i>Entrar</a></li>
+        <li><a href="#"><i class="material-icons">logout</i>Sair</a></li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+      </ul>
 
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" id="text_nav" aria-current="page" href="#">To do</a>
-            </li>
+      <!-- INICIO DA NAVBAR -->
+      <nav class="blue">
+        <div class="nav-wrapper container">
+          <a href="#!" class="brand-logo">
+            <div id="img">
+              <img src="{% static 'img/logo2.png' %}" width="60px" alt=""><br>
+            </div>
+          </a>
 
-            <li class="nav-item">
-              <a class="nav-link active" id="text_nav" aria-current="page" href="#">Tarefas</a>
-            </li>
+          <!-- BOTÃO MENU MOBILE -->
+          <a href="#" data-target="menu-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
-            <li class="nav-item">
-              <a class="nav-link active" id="text_nav" aria-current="page" href="#">Usuários</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link active" id="text_nav" aria-current="page" href="{% url 'logout' %}">Sair</a>
-            </li>
-            
-            {% else %}
-      
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" id="text_nav" aria-current="page" href="{% url 'login' %}">Entrar</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link active" id="text_nav" aria-current="page" href="#">Sobre</a>
-            </li>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#"><i class="material-icons left">home</i><strong>INICIO</strong></a></li>
+            <li><a href="#"><i class="material-icons left">phone</i><strong>CONTATO</strong></a></li>
+            <!-- Dropdown Trigger -->
+            <li><a class="dropdown-trigger btn yellow black-text" href="#!" data-target="dropdown1"><i class="material-icons left">face</i> MINHA CONTA<i
+                  class="material-icons right">arrow_drop_down</i></a></li>
           </ul>
-          
-          {% endif %}
-
         </div>
-    </nav>
+      </nav>
+      <ul class="sidenav" id="mobile-demo">
+        <li><a href="#"><i class="material-icons">home</i> INICIO</a></li>
+        <li><a href="#" class="btn"><i class="material-icons">face arrow_drop_down </i>MINHA CONTA</a></li>
+      </ul>
+      {% endblock %}
+    </header>
+  </section>
+  <!-- FIM DO BLOCK HEADER -->
+
+  <!-- INICIO DO MAIN -->
+  <section>
+    <main class="container">
+      {% block content %}
+
+      {% endblock %}
+    </main>
+
+  </section>
+
+  <!-- INICIO DO FOOTER -->
+  <section>
+    <footer class="page-footer blue">
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <div><a href="#!"><img class="brand-logo z-depth-5" src="{% static 'img/logo2.png' %}" alt="logo"
+                  height="50"></a></div>
+            <div>
+              <p class="lighten-1" style="text-align: justify;"> Projeto feito com o objetivo de gerenciar atividades para fazer em
+                um determinado dia, o mesmo tem as principais funções que um sistema WEB pode oferecer para o usuário
+                como : login, logout, registrar, criar, visualizar, editar e deletar as tarefas. Para a realização do
+                projeto foi utilizado umas das principais tecnologias para o desenvolvimento WEB, como exemplar : HTML5,
+                CSS3, JavaScript/ECMAScript, Django e Materialize.</p>
+            </div>
+          </div>
+        </div>
+        <div class="divider white"></div>
+
+        <div class="row">
+          <div class="col s6">
+            <h6 class="white-text"><strong>CONTATOS</strong></h6>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">teste@gmail.com</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">+55 093 xxxxx-xxxx</a></li>
+            </ul>
+          </div>
+
+          <div class="col s6">
+            <h6 class="white-text"><strong>SIGA-NOS NAS REDES SOCIAIS</strong></h6>
+
+            <div class="row">
+              <div class="col s4">
+                <img src="{% static 'img/facebook_.png' %}" alt="50px" width="50px">
+              </div>
+
+              <div class="col s4">
+                <img src="{% static 'img/instagram_.png' %}" alt="50px" width="50px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider white"></div>
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="center">
+            © 2021 - Todos os direitos reservados.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </section>
+
   </div>
-  
-  {% endblock %}
-  
-  {% block content %}
-  
-  {% endblock %}
 
+  <!--IMPORTANDO O MATERIALIZE JS-->
 
-  <br>
-  <footer>
-    {% block footer %}
-
-    {% endblock %}
-  </footer>
-  </div>
-
-  <!--IMPORTANDO O BOOTSTRAP A PARTIR DE DA CDN-->
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-
-
-  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
 
 </body>
 

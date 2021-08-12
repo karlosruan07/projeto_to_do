@@ -31,9 +31,10 @@ ALLOWED_HOSTS = ["*"]#para permitir requisições de diversos host tem colocar "
 # Application definition
 
 INSTALLED_APPS = [
-    
-    'jet.dashboard',
-    'jet',
+    #LIBs
+    #'jet.dashboard',
+    #'jet',
+    #LIBs
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,7 +45,9 @@ INSTALLED_APPS = [
     'about',
     'tasks',
     'users',
+    #LIBs
     'crispy_forms',
+    
 
 ]
 
@@ -114,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'America/Sao_paulo'
+TIME_ZONE = 'America/Recife'
 
 USE_I18N = True
 
