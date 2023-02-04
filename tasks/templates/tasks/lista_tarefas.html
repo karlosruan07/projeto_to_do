@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Listas
+{% endblock %}
+
+
+{% block content %}
+
+{% for task in tasks_list %}
+
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card darken-1">
+      <div class="card-content">
+        <span class="card-title center"> {{ task.title }} </span>
+        <p> {{ task.description }} </p>
+      </div>
+      <div class="card-action center">
+        <div class="left"><a href="#"><button class="btn"><i class="material-icons">edit</i>Editar</button></a></div>
+        <div class="rigth"><a href="#"><button class="btn"><i class="material-icons">delete</i>Apagar</button></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

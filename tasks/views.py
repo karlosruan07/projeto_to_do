@@ -28,6 +28,24 @@ def seunome(request, seunome):
 
 
 #####  FUNÇÕES DO TASKS #####
+
+@login_required
+def adicionar_tarefa(request):
+    if request.method == 'POST':
+        form = Form_tarefa(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.status = 'done'
+            post.user = request.user
+            post.save()
+            return redirect('lista-tarefas')
+        
+    else:
+        form = Form_tarefa()
+        
+    return render(request, 'tasks/adicionar_tarefa.html', {"form": form})
+
+
 @login_required
 def lista_tarefas(request):
     
@@ -50,7 +68,7 @@ def lista_tarefas(request):
             tasks = paginacao.get_page(page)
             contexto = {"tasks_list": tasks_list, "tarefas_concluidas_recente":tarefas_concluidas_recente,
             "tarefas_concluidas":tarefas_concluidas, "tarefas_incom":tarefas_incom}
-        return render(request, 'arquivos_html/tasks/lista_tarefas.html', contexto )
+        return render(request, 'tasks/lista_tarefas.html', {"tasks_list": tasks_list})
     else:
         return redirect('login')
 
@@ -62,21 +80,7 @@ def detalhe_tarefa(request, pk):
     return render(request, 'arquivos_html/tasks/detalhe_tarefa.html', {"tarefa": tarefa})
 
 
-@login_required
-def adicionar_tarefa(request):
-    if request.method == 'POST':
-        form = Form_tarefa(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.status = 'done'
-            post.user = request.user
-            post.save()
-            return redirect('lista_tarefas')
-        
-    else:
-        form = Form_tarefa()
-        
-    return render(request, 'arquivos_html/tasks/adicionar_tarefa.html', {"form": form})
+
 
 
 @login_required
@@ -92,7 +96,7 @@ def editar_tarefa(request, id):
             return redirect('lista_tarefas')
         else:
             return render(request, 'arquivos_html/tasks/editar_tarefa.html', {"form":form})
-    return render(request, 'arquivos_html/tasks/editar_tarefa.html', {"form":form, "tarefa_obtida":tarefa_obtida})
+    return render(request, 'tasks/editar_tarefa.html', {"form":form, "tarefa_obtida":tarefa_obtida})
 
 @login_required
 def confirmar_delete_tarefa(request, id):
